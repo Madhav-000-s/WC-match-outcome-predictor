@@ -1,0 +1,15 @@
+# Project-specific
+designdoc.md
+wc-match-outcome-prediction.ipynb
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
