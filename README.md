@@ -63,10 +63,19 @@ Key design choices:
 
 ---
 
+## Exploratory analysis
+
+Full EDA (data profiling, competition weight validation, team coverage checks) is in the Kaggle notebook:
+[kaggle.com/code/madhavendranath/wc-match-outcome-prediction](https://www.kaggle.com/code/madhavendranath/wc-match-outcome-prediction)
+
+---
+
 ## Repo structure
 
 ```
 WC match outcome predictor/
+├── predict.py          ← model, backtest, and simulation
+├── requirements.txt
 ├── README.md
 └── football-data/
     ├── results.csv
@@ -79,10 +88,17 @@ WC match outcome predictor/
 
 ## Usage
 
-**Dependencies**: `numpy`, `scipy`, `pandas`
-
 ```bash
-pip install numpy scipy pandas
+git clone <repo-url>
+cd WC-match-outcome-predictor
+pip install -r requirements.txt
+python predict.py
 ```
 
-The full implementation lives in the Kaggle notebook. To run locally, open the notebook in Jupyter and point the data paths at the `football-data/` directory.
+`predict.py` runs the full pipeline end-to-end:
+1. Loads and cleans `football-data/results.csv`
+2. Runs a walk-forward backtest across 8 half-life values (~5 min on a laptop)
+3. Fits the production model on all data
+4. Simulates the 2026 bracket 30,000 times and prints championship probabilities
+
+Expected output matches the results above (RPS 0.1657, Spain 13.6%, Argentina 11.9%, Brazil 10.3%).
